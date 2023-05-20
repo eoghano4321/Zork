@@ -11,12 +11,13 @@ Item::Item(string inDescription) {
 	description = inDescription;
 }
 
-void Item::setWeight(int inWeightGrams)
+
+inline void Item::setWeight(int inWeightGrams)
 {
     if (inWeightGrams > 9999 || inWeightGrams < 0)
-       cout << "weight invalid, must be 0<weight<9999" ;
+        cout << "weight invalid, must be 0<weight<9999" ;
     else
-	   weightGrams = inWeightGrams;
+        weightGrams = inWeightGrams;
 }
 
 void Item::setValue(float inValue)

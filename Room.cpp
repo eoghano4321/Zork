@@ -1,6 +1,33 @@
 #include "Room.h"
 #include "Command.h"
 
+///////////////////////////////////////////////////////////////
+///                      Room System                        ///
+///////////////////////////////////////////////////////////////
+
+/// Methods
+/**
+* Create a room object
+* Set the room at each of north, east, south and west exits
+* Return the name of the room
+* Return the name of the room and the items in it
+* Return a list of any available exits
+* Set image to display
+* Return the next room in any direction
+* Add an item to the room
+* Return the item in the room - used in the longDescription list
+* Return the number of items in the room
+* Check if an item is in the room
+* Return the weight of the last item - IDK what this would be used for
+* Return the value of the last item
+*/
+
+/// TODO
+/**
+* Allow users to put items from inventory into the room - This would likely be done in the main file though
+* Create a gui for the room using the images I created
+*     - Potentially create an image id by appending the directions to the end of the file name to instanciate in set Exits
+*/
 
 Room::Room(string description) {
 	this->description = description;

@@ -23,3 +23,6 @@ HEADERS += \
     Room.h \
     ZorkUL.h \
     item.h
+
+DISTFILES += \
+    screen.ui.qml

@@ -1,5 +1,15 @@
 #include "Parser.h"
 
+///////////////////////////////////////////////////////////////
+///                         Parser                          ///
+///////////////////////////////////////////////////////////////
+
+/// Methods
+/**
+* Get the inputted commands from the terminal and check if it is a valid command
+* Show all available commands
+*/
+
 Parser::Parser() {
 	commands = new CommandWords();
 }

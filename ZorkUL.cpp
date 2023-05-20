@@ -15,33 +15,44 @@ ZorkUL::ZorkUL() {
 }
 
 void ZorkUL::createRooms()  {
-    Room *a, *b, *c, *d, *e, *f, *g, *h, *i, *j;
+    Room *a, *b, *c, *d, *e, *f, *g, *h, *i, *j, *k, *l, *m, *n, *o, *p;
+    Item *x;
 
-    a = new Room("middle");
-        a->addItem(new Item("x", 1, 11));
+
+    x = new Item("x", 1, 11);
+    x->setWeight(22);
+    a = new Room("Start Room");
+        a->addItem(x);
         a->addItem(new Item("y", 2, 22));
-    b = new Room("east");
+    b = new Room("Corridor");
         b->addItem(new Item("xx", 3, 33));
         b->addItem(new Item("yy", 4, 44));
-    c = new Room("west");
-    d = new Room("south");
-    e = new Room("southeast");
-    f = new Room("north");
-    g = new Room("northeast");
-    h = new Room("northwest");
-    i = new Room("southwest");
-    j = new Room("northnorth");
+    c = new Room("T Junction");
+    d = new Room("Cellar");
+    e = new Room("Corner");
+    f = new Room("T Junction 2");
+    g = new Room("Perpendicular");
+    h = new Room("Key Room");
+        h->addItem(new Item("Key", 1, 100));
+    i = new Room("Corner 2");
+        i->addItem(new Item("map", 1, 1));
+    j = new Room("Atrium");
         j->addItem(new Item("gun", 2, 10));
-
+    k = new Room("Are you reading these");
+    l = new Room("Corner 3");
+    m = new Room("Another Corner");
+    n = new Room("Wow a corner");
+    o = new Room("Corridor");
+    p = new Room("The end?");
 
 //             (N, E, S, W)
-	a->setExits(f, b, d, c);
-	b->setExits(NULL, NULL, NULL, a);
-	c->setExits(NULL, a, NULL, NULL);
-	d->setExits(a, e, NULL, i);
-	e->setExits(NULL, NULL, NULL, d);
-    f->setExits(j, g, a, h);
-	g->setExits(NULL, NULL, NULL, f);
+    a->setExits(NULL, b, NULL, NULL);
+    b->setExits(NULL, c, NULL, a);
+    c->setExits(NULL, e, g, d);
+    d->setExits(NULL, c, NULL, NULL);
+    e->setExits(NULL, NULL, i, f);
+    f->setExits(NULL, e, j, g);
+    g->setExits(c, f, k, NULL);
 	h->setExits(NULL, f, NULL, NULL);
     i->setExits(NULL, d, NULL, NULL);
     j->setExits(NULL, NULL, f, NULL);
@@ -96,16 +107,22 @@ bool ZorkUL::processCommand(Command command) {
 
 	else if (commandWord.compare("map") == 0)
 		{
-        cout << "        [j]        " << endl;
-        cout << "         |         " << endl;
-        cout << "         |         " << endl;
-        cout << "[h] --- [f] --- [g]" << endl;
-		cout << "         |         " << endl;
-        cout << "         |         " << endl;
-		cout << "[c] --- [a] --- [b]" << endl;
-		cout << "         |         " << endl;
-		cout << "         |         " << endl;
-		cout << "[i] --- [d] --- [e]" << endl;
+        cout << "[a] -- [b] -- [c] -- [d]  " << endl;
+        cout << "               |          " << endl;
+        cout << "               |          " << endl;
+        cout << "[e] -- [f] -- [g]    [key]" << endl;
+        cout << " |      |      |      |   " << endl;
+        cout << " |      |      |      |   " << endl;
+        cout << "[i] -- [j] -- [k] -- [l]  " << endl;
+        cout << "        |                 " << endl;
+        cout << "        |                 " << endl;
+        cout << "[m] -- [n]                " << endl;
+        cout << " |                        " << endl;
+        cout << " |                        " << endl;
+        cout << "[o]                       " << endl;
+        cout << " |                        " << endl;
+        cout << " |                        " << endl;
+        cout << "[p]                       " << endl;
 		}
 
 	else if (commandWord.compare("go") == 0)
