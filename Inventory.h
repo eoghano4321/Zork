@@ -5,6 +5,8 @@
 #include <string>
 #include <vector>
 #include "item.h"
+#include "Character.h"
+
 using namespace std;
 using std::vector;
 
@@ -13,6 +15,7 @@ private:
     vector <Item> itemsInInv;
     int maxWeight;
     int currWeight;
+    friend class Character;
 
 public:
     int numberOfItems();
