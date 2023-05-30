@@ -22,19 +22,25 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void printWelcome();
+    void updateCurr();
     void goNorth();
     void goSouth();
     void goWest();
     void goEast();
+    void go(string dir);
     void setOutputText(QString str);
     void submitLine();
+
+private:
     QString inputTxt;
     QLabel* outputLbl;
+    QLabel* roomLbl;
     QLineEdit* inputLbl;
+
     Parser parser;
     CommandProcessor cp;
 
-private:
     Ui::MainWindow *ui;
     QString str;
 };

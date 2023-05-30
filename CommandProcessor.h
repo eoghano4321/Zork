@@ -10,22 +10,26 @@
 
 class CommandProcessor
 {
-public:
+private:
+    friend class MainWindow;
     string outputStr;
     Parser parser;
     Inventory invent;
+    void createRooms();
     Room *currentRoom;
-    void printWelcome();
     void printHelp();
-    void goRoom(Command command);
+    void goRoom(string dir);
     bool processCommand(Command command);
     void describeItem(Command command);
     void createItems();
     void displayItems();
     void printInv();
-    string go(string direction);
+    void take(Command command);
+    void put(Command command);
+    void keyCheck();
     string setCurrRoom(Room* nextRoom);
     CommandProcessor();
+    Room *p, *o, *w;
 };
 
 #endif // COMMANDPROCESSOR_H

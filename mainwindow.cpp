@@ -7,10 +7,15 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+
     ui->setupUi(this);
     outputLbl = findChild<QLabel *>("Output");
     inputLbl = findChild<QLineEdit *>("Input");
 
+    roomLbl = findChild<QLabel *>("Room");
+
+    MainWindow::printWelcome();
+    MainWindow::updateCurr();
     QObject::connect(ui->NorthButton, &QPushButton::pressed, this, &MainWindow::goNorth);
     QObject::connect(ui->SouthButton, &QPushButton::pressed, this, &MainWindow::goSouth);
     QObject::connect(ui->WestButton, &QPushButton::pressed, this, &MainWindow::goWest);
@@ -25,18 +30,29 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::printWelcome() {
+    MainWindow::setOutputText("start\n info for help");
+}
+
 void MainWindow::goNorth(){
-    MainWindow::setOutputText("North");
-    //outputLbl->setText("north");
+    cp.goRoom("north");
+    MainWindow::setOutputText(QString::fromStdString(cp.outputStr));
+    MainWindow::updateCurr();
 }
 void MainWindow::goSouth(){
-    MainWindow::setOutputText("south");
+    cp.goRoom("south");
+    MainWindow::setOutputText(QString::fromStdString(cp.outputStr));
+    MainWindow::updateCurr();
 }
 void MainWindow::goEast(){
-    MainWindow::setOutputText("east");
+    cp.goRoom("east");
+    MainWindow::setOutputText(QString::fromStdString(cp.outputStr));
+    MainWindow::updateCurr();
 }
 void MainWindow::goWest(){
-    MainWindow::setOutputText("west");
+    cp.goRoom("west");
+    MainWindow::setOutputText(QString::fromStdString(cp.outputStr));
+    MainWindow::updateCurr();
 }
 
 void MainWindow::submitLine(){
@@ -48,11 +64,21 @@ void MainWindow::submitLine(){
     finished = cp.processCommand(*command);
     inputTxt = QString::fromStdString(cp.outputStr);
     MainWindow::setOutputText(inputTxt);
+    MainWindow::updateCurr();
     if(finished){
         exit(0);
     }
 }
 
+
+void MainWindow::updateCurr(){
+    if(cp.currentRoom->shortDescription().compare("Win") == 0){
+        roomLbl->setText("Freedom");
+        MainWindow::setOutputText("You've won\n\nEnter quit to close");
+    }
+    else
+        roomLbl->setText("Current room:\n"+ QString::fromStdString(cp.currentRoom->longDescription()));
+}
 
 void MainWindow::setOutputText(QString str){
     outputLbl->setText(str);

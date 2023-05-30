@@ -8,7 +8,6 @@ vector<string> CommandWords::validCommands;
 CommandWords::CommandWords() {
     // Populate the vector if we haven't already.
     if (validCommands.empty()) {
-        validCommands.push_back("go");
         validCommands.push_back("quit");
         validCommands.push_back("info");
         validCommands.push_back("map");

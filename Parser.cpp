@@ -21,21 +21,9 @@ Command* Parser::getCommand() {
     string buffer;
     vector<string> words;
 
-    // cout << "> "; // print prompt
-
-    //getline(cin, buffer, '\n');	// read a line from cin to "buffer"
-    /////////////////////
-    /////////////////////
-    /// Here we want to take input from the GUI input label instead of cin
-    /// Could make this class a friend of mainwindow so that it can easily access the value of the GUI component
-    /// Dont want it reading from cin as it causes an infinite loop of errors
-    /// Could (Probably should) also have this be triggered on a submit button being pressed as opposed to an infinite loop
-    /////////////////////
-    /////////////////////
-
     string::size_type pos = 0, last_pos = 0;
 
-    // Break "buffer" up by spaces
+    // Break input up by spaces
     bool finished = false;
     while (!finished) {
         pos = inputStr.find_first_of(' ', last_pos);

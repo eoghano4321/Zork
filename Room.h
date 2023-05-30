@@ -19,6 +19,7 @@ private:
     vector <Item> itemsInRoom;
 
 
+
 public:
     int numberOfItems();
     Room(string description);
@@ -28,10 +29,12 @@ public:
     Room* nextRoom(string direction);
     void addItem(Item *inItem);
     string displayItem();
-    int isItemInRoom(string inString);
+    int isItemInRoom(Item *inItem);
     int getWeightofItem();
     float getValofItem();
     void removeItemFromRoom(int location);
+    bool isWin();
+    bool operator==(const Room &other) const;
 };
 
 #endif

@@ -15,19 +15,27 @@ private:
     vector <Item> itemsInInv;
     int maxWeight;
     int currWeight;
-    friend class Character;
+    int currVal;
+    int lastWeight;
+    int lastVal;
+    inline void remWV(Item *inItem);
+    inline void addWV(Item *inItem);
 
 public:
     int numberOfItems();
     Inventory();
     void addItem(Item *inItem);
     string displayItem();
-    int isItemInInv(string inString);
-    void removeItemFromInv(string inString); //Item itemToRem);
+    int isItemInInv(Item *inItem);
+    void removeItemFromInv(int location);
     string printInv();
     int getWeight();
+    int getVal();
+    int getLastWeight();
+    int getLastVal();
     void setWeight(int weight);
-    void describe(string inString);
+    void setVal(int val);
+    string describe(int location);
 
 };
 

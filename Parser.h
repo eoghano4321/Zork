@@ -3,7 +3,6 @@
 
 #include "Command.h"
 #include "CommandWords.h"
-//#include "mainwindow.h"
 
 class Parser {
 private:
