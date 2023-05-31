@@ -27,8 +27,6 @@ set(PROJECT_SOURCES
         Item.h
         Key.h
         Key.cpp
-        Character.h
-        Character.cpp
         Parser.cpp
         Parser.h
         Room.cpp
