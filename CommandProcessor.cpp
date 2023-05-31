@@ -9,6 +9,10 @@ void CommandProcessor::createRooms()  {
     Room *a, *b, *c, *d, *e, *f, *g, *h, *i, *j, *k, *l, *m, *n;
     Item *x;
 
+    Item *key = new Key("Key");
+    key->setWeight(42);
+    key->setValue(42);
+
     x = new Item("x", 1, 11);
     x->setWeight(22);
     a = new Room("Start Room (a)");
@@ -23,7 +27,7 @@ void CommandProcessor::createRooms()  {
     f = new Room("T Junction (f)");
     g = new Room("Perpendicular (g)");
     h = new Room("Key Room (h)");
-    h->addItem(new Item("Key", 42, 42));
+    h->addItem(key);
     i = new Room("Corner (i)");
     i->addItem(new Item("map", 1, 1));
     j = new Room("Atrium (j)");
@@ -152,8 +156,7 @@ void CommandProcessor::goRoom(string dir) {
     }
     else {
         outputStr = "went " + dir;
-        //currentRoom = nextRoom;
-        cout << CommandProcessor::setCurrRoom(nextRoom) << endl;
+        cout << setCurrRoom(nextRoom) << endl;
     }
 }
 
@@ -163,15 +166,25 @@ void CommandProcessor::describeItem(Command command){
         cout << "incomplete input"<< endl;
         return;
     }
-
-    Item *inItem = new Item(command.getSecondWord(), 1, 1);
+    Item *inItem;
+    if(command.getSecondWord().compare("Key") == 0)
+        inItem = new Key("Key");
+    else
+        inItem = new Item(command.getSecondWord(), 1, 1);
     int loc = invent.isItemInInv(inItem);
-    if(loc < 0){
+    if(loc == -1){
         outputStr = "No item exists\n";
         cout << "No item exists" << "\n";
-    }else{
-        outputStr = invent.describe(loc);
-        cout << invent.describe(loc) << endl;
+    }
+    else {
+        if(inItem->canRemove()){
+            outputStr = invent.describe(loc);
+            cout << invent.describe(loc) << endl;
+        }
+        else{
+            outputStr = invent.describe(loc) + " Use this to open the exit in room p";
+            cout << invent.describe(loc) << " Use this to open the exit in room p" << endl;
+        }
     }
     delete inItem;
 }
@@ -191,7 +204,7 @@ void CommandProcessor::take(Command command){
     outputStr = "you're trying to take " + command.getSecondWord() + "\n\n";
     cout << "you're trying to take " << command.getSecondWord() << endl;
     Item* inItem = new Item(command.getSecondWord());
-    int location = currentRoom->isItemInRoom(inItem);//command.getSecondWord());
+    int location = currentRoom->isItemInRoom(inItem);
     if (location  < 0 ){
         outputStr += "item is not in room\n";
         cout << "item is not in room" << endl;
@@ -214,31 +227,41 @@ void CommandProcessor::take(Command command){
 void CommandProcessor::put(Command command){
     outputStr = "you're trying to put " + command.getSecondWord() + "\n";
     cout << "you're trying to put " << command.getSecondWord() << endl;
-    Item* inItem = new Item(command.getSecondWord());
+    Item *inItem;
+    if(command.getSecondWord().compare("Key") == 0)
+        inItem = new Key("Key");
+    else
+        inItem = new Item(command.getSecondWord(), 1, 1);
     int location = invent.isItemInInv(inItem);
     cout << "Located at " << location << endl;
-    if (location  < 0 ){
+    if (location  == -1 ){
         outputStr = " item is not in inventory\n";
         cout << " item is not in inventory" << endl;
     }
-    else{
-        outputStr = " item is in inventory\n";
-        cout << " item is in inventory" << endl;
+    else if (location >= 0){
+        if(inItem->canRemove()){
+            outputStr = " item is in inventory\n";
+            cout << " item is in inventory" << endl;
 
-        invent.removeItemFromInv(location);
-        inItem->setWeight(invent.getLastWeight());
-        inItem->setValue(invent.getLastVal());
+            invent.removeItemFromInv(location);
+            inItem->setWeight(invent.getLastWeight());
+            inItem->setValue(invent.getLastVal());
 
-        currentRoom->addItem(inItem);
+            currentRoom->addItem(inItem);
+        }
+        else{
+            outputStr = " item is in inventory but cannot be removed\n";
+            cout << " item is in inventory but cannot be removed" << endl;
+        }
     }
     outputStr += "\n" + currentRoom->longDescription();
     cout << currentRoom->longDescription() << endl;
 }
 
 void CommandProcessor::keyCheck(){
-    Item* Key = new Item("Key", 42, 42);
-    if(invent.isItemInInv(Key) != -1){
+    Item* key = new Key("Key");
+    if(invent.isItemInInv(key) != -1){
         p->setExits(o, NULL, w, NULL);
     }
-    delete Key;
+    delete key;
 }

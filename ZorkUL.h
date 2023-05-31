@@ -10,7 +10,8 @@
 using namespace std;
 
 class ZorkUL {
-
+public:
+    ZorkUL();
 };
 
 #endif /*ZORKUL_H_*/

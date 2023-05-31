@@ -25,6 +25,8 @@ set(PROJECT_SOURCES
         Inventory.cpp
         Item.cpp
         Item.h
+        Key.h
+        Key.cpp
         Character.h
         Character.cpp
         Parser.cpp

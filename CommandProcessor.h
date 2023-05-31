@@ -7,6 +7,7 @@
 #include "Parser.h"
 #include "Inventory.h"
 #include "Room.h"
+#include "Key.h"
 
 class CommandProcessor
 {

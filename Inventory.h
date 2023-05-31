@@ -5,7 +5,6 @@
 #include <string>
 #include <vector>
 #include "Item.h"
-#include "Character.h"
 
 using namespace std;
 using std::vector;

@@ -25,6 +25,7 @@ public:
     float getValue();
     void setValue(float value);
     bool operator==(const Item &other) const;
+    virtual bool canRemove();
 
 
 

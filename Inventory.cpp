@@ -30,7 +30,7 @@ string Inventory::printInv() {
         }
     }
     tempString = tempString + "\n";
-    tempString = tempString + "Weight : " + to_string(currWeight) + " / " + to_string(maxWeight) + "\n";
+    tempString = tempString + "Weight : " + to_string(currWeight) + "\n"; //+ to_string(maxWeight) + "\n";
     return tempString;
 }
 

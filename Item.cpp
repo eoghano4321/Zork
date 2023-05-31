@@ -2,7 +2,7 @@
 #include <cmath>
 
 
-Item::Item (string inDescription, int inWeightGrams, float inValue/**, int weaponCheck*/) {
+Item::Item (string inDescription, int inWeightGrams, float inValue) {
     description = inDescription;
     setWeight(inWeightGrams);
     value = inValue;
@@ -49,6 +49,10 @@ int Item::getWeight(){
 
 float Item::getValue(){
     return value;
+}
+
+bool Item::canRemove(){
+    return true;
 }
 
 ////////////////////////////////////////////////
